@@ -70,11 +70,13 @@ const generateData = (size, noise) => {
         return { features: [x, y], label }
     });
 }
+const data = generateData(100, 10)
 
-const data = generateData(100, 20)
+// run gradient descent and check if the learned values are correct
 const { weights, bias } = gradientDescent(data, {epochs: 1000, learningRate: 0.0001, batchSize: 10})
-
-// check if the learned values are correct
 data.slice(0, 5).forEach(({ features, label }) => {
-    console.log(features, label, Math.sign(calculateNeuron(features, weights, bias)))
+    const result = calculateNeuron(features, weights, bias)
+    const coordinates = features.map(x => x.toFixed(3))
+    const correct = Math.sign(result) === label
+    console.log(`Input coordinates: [${coordinates}], Expected: ${label} Result: ${result.toFixed(3)}, Correct: ${correct}`)
 })

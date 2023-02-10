@@ -54,5 +54,8 @@ const data = Array(100).fill(null).map(() => {
     return {label: random / 3 + 2, feature: random};
 });
 
-gradientDescent(data, {epochs: 1000, learningRate: 0.1, batchSize: 10})
+// run final gradient descent calculation
+const { weight, bias } = gradientDescent(data, {epochs: 1000, learningRate: 0.1, batchSize: 10})
+console.log(`Original function: y = 0.333 * x + 2`)
+console.log(`Approximated function: y = ${weight.toFixed(3)} * x + ${bias.toFixed(3)}`)
 
